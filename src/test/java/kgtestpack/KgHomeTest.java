@@ -13,6 +13,7 @@ import common.DriverManager;
 import pageobjects.KgBrandUgg;
 import pageobjects.KgHome;
 import pageobjects.KgMenBoots;
+import pageobjects.KgMenPdp;
 
 import static org.testng.Assert.assertEquals;
 
@@ -27,7 +28,8 @@ public class KgHomeTest {
 	//Method to open the website 'kurtgeiger.com' in chrome browser
 	@BeforeTest
 	public void init() {
-		driver = DriverManager.getDriver();
+		//DriverManager.driver;
+		driver = DriverManager.getDriver("chrome");
 		logger.info("Open Browser");
 		KgHome home = new KgHome(driver);
 		home.openHomePage();
@@ -40,7 +42,7 @@ public class KgHomeTest {
   			  	   Then the user should see list of products
   			  	   When the user select the boots category
   			  	   Then the user should see only boots	*/	
-	@Test
+	@Test (priority = 0)
 		public void clickSubMenuBoots() {
 			KgHome menu = new KgHome(driver);
 			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -59,7 +61,7 @@ public class KgHomeTest {
  	   			   Then the user should see list of brands
  	   			   And the user select UGG brand from the list
  	   			   Then the user should see the list of products from UGG	*/
-	@Test
+	@Test (priority = 1)
 	public void selectSubMenuUgg() {
 		KgHome brand = new KgHome(driver);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -71,6 +73,32 @@ public class KgHomeTest {
 		String brandUggTest =  brandUgg.getBrandUggText();
 		assertEquals("UGG", brandUggTest); //assert the text UGG
 		logger.info("The user is redirected to the UGG page ");
+	}
+	
+	/*Scenario 3: Given the user select men category from the header
+	 			  And the user is on PDP
+	 			  When the select any colour and size for the chosen men category
+	 			  And the user adds the product to the bag
+	 			  Then the user should see the bag with the single item
+	 			  And when the user clicks 'proceed to checkout'
+	 			  Then the user should be navigated to the checkout page */
+	@Test (priority = 2)
+	public void checkout() {
+		KgHome checkout = new KgHome(driver);
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		checkout.clickCategoryMen();
+		logger.info("The category Men has been clicked");
+		KgMenPdp men = new KgMenPdp(driver);
+		boolean verify =men.verifyCurrentUrl();
+		Assert.assertTrue(verify); //assert the current url
+		men.selectShoeSize().selectShoeSize(); //selecting the shoe size and colour
+		logger.info("Shoe colour and size has been selected");
+		boolean verifyFilter = men.verifyFilters();
+		Assert.assertTrue(verifyFilter);//assert the url after filtering
+		logger.info("Men's shoes are filtered and displayed based on the size and colour");
+		
+		
+		
 	}
 	
 	//Method to close the browser

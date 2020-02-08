@@ -64,4 +64,10 @@ public class KgHome {
 		action.moveToElement(subMenuUgg).click().perform();
 		return this;
 	}
+	
+	//method to click the category Men
+	public KgHome clickCategoryMen() {
+		this.categoryMen.click();
+		return this;
+	}
 }
