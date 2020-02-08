@@ -96,8 +96,7 @@ public class KgHomeTest {
 		boolean verifyFilter = men.verifyFilters();
 		Assert.assertTrue(verifyFilter);//assert the url after filtering
 		logger.info("Men's shoes are filtered and displayed based on the size and colour");
-		logger.info("Method name is changed");
-		
+
 		
 	}
 	
