@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 /*
  * author: remya
- * Page objects for the Men product description page
+ * Page objects for the Men product description page - pdp
  */
 
 public class KgMenPdp {

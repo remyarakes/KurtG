@@ -83,7 +83,7 @@ public class KgHomeTest {
 	 			  And when the user clicks 'proceed to checkout'
 	 			  Then the user should be navigated to the checkout page */
 	@Test (priority = 2)
-	public void checkout() {
+	public void checkoutProcess() {
 		KgHome checkout = new KgHome(driver);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		checkout.clickCategoryMen();
@@ -96,8 +96,7 @@ public class KgHomeTest {
 		boolean verifyFilter = men.verifyFilters();
 		Assert.assertTrue(verifyFilter);//assert the url after filtering
 		logger.info("Men's shoes are filtered and displayed based on the size and colour");
-		
-		
+
 		
 	}
 	
